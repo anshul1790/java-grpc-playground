@@ -39,6 +39,7 @@ public class Lec03Performance {
 
     private static void proto(Person person) {
         var bytes = person.toByteArray();
+        log.info("bytes length proto {} bytes", bytes.length);
         try {
             Person.parseFrom(bytes);
         } catch (InvalidProtocolBufferException e) {
@@ -49,6 +50,7 @@ public class Lec03Performance {
     private static void json(JsonPerson jsonPerson) {
         try {
             var bytes = mapper.writeValueAsBytes(jsonPerson);
+            log.info("bytes length json {} bytes", bytes.length);
             mapper.readValue(bytes, JsonPerson.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
