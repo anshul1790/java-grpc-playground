@@ -2,7 +2,7 @@ package com.learn.javagrpcplayground.sec03;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.protobuf.InvalidProtocolBufferException;
-import com.grpc.sec03.person.service.Person;
+import sec03.person.service.Person;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;

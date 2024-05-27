@@ -1,5 +1,5 @@
 syntax="proto3";
-package com.grpc.sec01.person.service;
+package sec01.person.service;
 option java_multiple_files=true;
 
 message Person{

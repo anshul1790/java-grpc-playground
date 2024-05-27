@@ -1,8 +1,8 @@
 package com.learn.javagrpcplayground.sec03;
 
-import com.grpc.sec03.composition.service.Address;
-import com.grpc.sec03.composition.service.School;
-import com.grpc.sec03.composition.service.Student;
+import sec03.composition.service.Address;
+import sec03.composition.service.School;
+import sec03.composition.service.Student;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

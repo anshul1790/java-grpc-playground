@@ -1,5 +1,5 @@
 syntax="proto3";
-package com.grpc.sec03.collection.service;
+package sec03.collection.service;
 option java_multiple_files=true;
 
 message Book {
