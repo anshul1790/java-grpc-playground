@@ -6,12 +6,10 @@ import com.grpc.sec03.person.service.Person;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
-import java.nio.file.Path;
 
 @Slf4j
 public class Lec03Performance {
 
-    private static final Path PATH = Path.of("person.out");
     private static final ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) throws IOException {
