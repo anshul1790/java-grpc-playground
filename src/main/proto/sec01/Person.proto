@@ -1,0 +1,7 @@
+syntax="proto3";
+package com.grpc.persons.message.service;
+option java_multiple_files=true;
+
+message Person{
+  string name=1;
+}
