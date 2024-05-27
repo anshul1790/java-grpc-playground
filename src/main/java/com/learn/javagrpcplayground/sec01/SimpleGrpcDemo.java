@@ -1,7 +1,7 @@
 package com.learn.javagrpcplayground.sec01;
 
 
-import com.grpc.person.service.Person;;
+import com.grpc.sec01.person.service.Person;;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
