@@ -6,6 +6,9 @@ message Television {
   string brand=1;
   // we no longer needed model
   // int32 model=2;
+  // whenever we remove the field - use reserved keyword so that future developer don't use it.
+  reserved 2;
+  reserved "year", "model";
   Type type=3;
 }
 
