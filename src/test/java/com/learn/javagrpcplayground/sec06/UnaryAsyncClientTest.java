@@ -1,5 +1,6 @@
 package com.learn.javagrpcplayground.sec06;
 
+import com.learn.javagrpcplayground.common.ResponseObserver;
 import io.grpc.stub.AbstractAsyncStub;
 import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.Assertions;
@@ -16,10 +17,15 @@ public class UnaryAsyncClientTest extends AbstractTest {
     private static final Logger log = LoggerFactory.getLogger(UnaryAsyncClientTest.class);
 
     @Test
-    public void getBalanceTest() throws InterruptedException {
+    public void getBalanceTest() {
         var request = BalanceCheckRequest.newBuilder().setAccountNumber(1).build();
-        var latch = new CountDownLatch(1);
-        this.asyncStub.getAccountBalance(request, new StreamObserver<>() {
+        // var latch = new CountDownLatch(1);
+        var observer = ResponseObserver.<AccountBalance>create(1);
+        this.asyncStub.getAccountBalance(request, observer);
+        observer.await();
+        log.info("Items are: {}", observer.getItems().size());
+
+        /*this.asyncStub.getAccountBalance(request, new StreamObserver<>() {
             @Override
             public void onNext(AccountBalance value) {
                 log.info("Async balance received: {}", value);
@@ -38,7 +44,7 @@ public class UnaryAsyncClientTest extends AbstractTest {
             }
         });
 
-        latch.await();
+        latch.await();*/
     }
 
 }
