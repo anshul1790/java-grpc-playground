@@ -1,6 +1,5 @@
 package com.learn.javagrpcplayground.common;
 
-import com.learn.javagrpcplayground.sec06.BankServiceImpl;
 import io.grpc.*;
 import lombok.extern.slf4j.Slf4j;
 
