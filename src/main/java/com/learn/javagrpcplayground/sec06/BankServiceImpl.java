@@ -1,8 +1,10 @@
 package com.learn.javagrpcplayground.sec06;
 
+import com.google.protobuf.Empty;
 import com.learn.javagrpcplayground.sec06.repository.AccountRepository;
 import io.grpc.stub.StreamObserver;
 import sec06.AccountBalance;
+import sec06.AllAccountsResponse;
 import sec06.BalanceCheckRequest;
 import sec06.BankServiceGrpc;
 
@@ -27,5 +29,18 @@ public class BankServiceImpl extends BankServiceGrpc.BankServiceImplBase {
         // to tell our server that while processing request we have encountered an error
         //responseObserver.onError();
 
+    }
+
+
+    @Override
+    public void getAllAccounts(Empty request, StreamObserver<AllAccountsResponse> responseObserver) {
+        var accounts = AccountRepository.getAllAccounts()
+                .entrySet()
+                .stream()
+                .map(e -> AccountBalance.newBuilder().setAccountNumber(e.getKey()).setBalance(e.getValue()).build())
+                .toList();
+        var response = AllAccountsResponse.newBuilder().addAllAccounts(accounts).build();
+        responseObserver.onNext(response);
+        responseObserver.onCompleted();
     }
 }

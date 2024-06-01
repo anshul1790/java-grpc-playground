@@ -1,5 +1,8 @@
 package com.learn.javagrpcplayground.sec06.repository;
 
+import sec03.collection.service.Collection;
+
+import java.util.Collections;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -15,5 +18,9 @@ public class AccountRepository {
 
     public static Integer getBalance(int accountNumber) {
         return db.get(accountNumber);
+    }
+
+    public static Map<Integer, Integer> getAllAccounts() {
+        return Collections.unmodifiableMap(db);
     }
 }
