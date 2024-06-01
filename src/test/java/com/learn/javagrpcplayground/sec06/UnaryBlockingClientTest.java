@@ -1,6 +1,7 @@
 package com.learn.javagrpcplayground.sec06;
 
 
+import com.google.protobuf.Empty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -23,6 +24,10 @@ public class UnaryBlockingClientTest extends AbstractTest {
 
     }
 
-
+        @Test
+        public void allAccountsTest() {
+            var allAccountsResponse = this.blockingStub.getAllAccounts(Empty.getDefaultInstance());
+            log.info("All accounts size: {}", allAccountsResponse.getAccountsCount());
+        }
 
 }
