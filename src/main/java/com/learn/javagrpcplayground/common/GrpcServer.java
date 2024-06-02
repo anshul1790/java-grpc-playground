@@ -52,7 +52,7 @@ public class GrpcServer {
 
     public void stop() {
         server.shutdownNow();
-        log.info("server stopped");
+        log.info("Server stopped");
     }
 
     /*public static void main(String[] args) throws IOException, InterruptedException {

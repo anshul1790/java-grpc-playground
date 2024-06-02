@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import sec06.Money;
 import sec06.WithdrawRequest;
 
-public class ServerStreamingClientTest extends AbstractTest{
+public class ServerStreamingTest extends AbstractTest{
 
-    private static final Logger log = LoggerFactory.getLogger(ServerStreamingClientTest.class);
+    private static final Logger log = LoggerFactory.getLogger(ServerStreamingTest.class);
 
     @Test
     public void blockingClientWithdrawTest() {
