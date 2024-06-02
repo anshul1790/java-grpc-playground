@@ -3,6 +3,7 @@ package com.learn.javagrpcplayground.sec06;
 import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.protobuf.Empty;
 import com.learn.javagrpcplayground.sec06.repository.AccountRepository;
+import com.learn.javagrpcplayground.sec06.requesthandlers.DepositRequestHandler;
 import io.grpc.stub.StreamObserver;
 import lombok.extern.slf4j.Slf4j;
 import sec06.*;
@@ -67,4 +68,8 @@ public class BankServiceImpl extends BankServiceGrpc.BankServiceImplBase {
         responseObserver.onCompleted();
     }
 
+    @Override
+    public StreamObserver<DepositRequest> deposit(StreamObserver<AccountBalance> responseObserver) {
+        return new DepositRequestHandler(responseObserver);
+    }
 }

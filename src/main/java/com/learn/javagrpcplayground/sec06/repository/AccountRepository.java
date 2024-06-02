@@ -27,4 +27,8 @@ public class AccountRepository {
     public static void deductAmount(int accountNum, int amount) {
         db.computeIfPresent(accountNum, (k, v) -> v - amount);
     }
+
+    public static void addAmount(int accountNum, int amount) {
+        db.computeIfPresent(accountNum, (k, v) -> v + amount);
+    }
 }
