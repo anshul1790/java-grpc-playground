@@ -1,13 +1,15 @@
 package com.learn.javagrpcplayground.sec06;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.google.protobuf.Empty;
 import com.learn.javagrpcplayground.sec06.repository.AccountRepository;
 import io.grpc.stub.StreamObserver;
-import sec06.AccountBalance;
-import sec06.AllAccountsResponse;
-import sec06.BalanceCheckRequest;
-import sec06.BankServiceGrpc;
+import lombok.extern.slf4j.Slf4j;
+import sec06.*;
 
+import java.util.concurrent.TimeUnit;
+
+@Slf4j
 public class BankServiceImpl extends BankServiceGrpc.BankServiceImplBase {
 
     @Override
@@ -43,4 +45,26 @@ public class BankServiceImpl extends BankServiceGrpc.BankServiceImplBase {
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
+
+    @Override
+    public void withdraw(WithdrawRequest request, StreamObserver<Money> responseObserver) {
+        var accountNumber = request.getAccountNumber();
+        var requestedAmount = request.getAmount();
+        var accountBalance = AccountRepository.getBalance(accountNumber);
+
+        if (requestedAmount > accountBalance) {
+            responseObserver.onCompleted(); // we will change it to error message later
+            return;
+        }
+
+        for (int i = 0; i < (requestedAmount / 10); i++) {
+            var money = Money.newBuilder().setAmount(10).build();
+            responseObserver.onNext(money);
+            log.info("Money sent: {}", money);
+            AccountRepository.deductAmount(accountNumber, 10);
+            Uninterruptibles.sleepUninterruptibly(1, TimeUnit.SECONDS);
+        }
+        responseObserver.onCompleted();
+    }
+
 }
