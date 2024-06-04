@@ -1,16 +1,11 @@
 package com.learn.javagrpcplayground.sec06;
 
 import com.learn.javagrpcplayground.common.ResponseObserver;
-import io.grpc.stub.AbstractAsyncStub;
-import io.grpc.stub.StreamObserver;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import sec06.AccountBalance;
 import sec06.BalanceCheckRequest;
-
-import java.util.concurrent.CountDownLatch;
 
 public class UnaryAsyncClientTest extends AbstractTest {
 
@@ -21,7 +16,7 @@ public class UnaryAsyncClientTest extends AbstractTest {
         var request = BalanceCheckRequest.newBuilder().setAccountNumber(1).build();
         // var latch = new CountDownLatch(1);
         var observer = ResponseObserver.<AccountBalance>create(1);
-        this.asyncStub.getAccountBalance(request, observer);
+        this.asyncBankServiceStub.getAccountBalance(request, observer);
         observer.await();
         log.info("Items are: {}", observer.getItems().size());
 

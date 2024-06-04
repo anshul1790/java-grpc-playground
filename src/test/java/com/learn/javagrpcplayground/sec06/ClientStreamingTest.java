@@ -22,7 +22,7 @@ public class ClientStreamingTest extends AbstractTest{
         var responseObserver = ResponseObserver.<AccountBalance>create();
         // the request observer is going to be the stream that a client server will handle.
         // As we know that client needs to send a stream, this is how it is being handled below
-        var requestObserver = this.asyncStub.deposit(responseObserver);
+        var requestObserver = this.asyncBankServiceStub.deposit(responseObserver);
 
         // this will interact with client server and keep on sending the messages
         // First using onNext it will create a initial stream by setting account num

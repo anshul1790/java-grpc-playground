@@ -27,6 +27,14 @@ public class TransferRequestHandler implements StreamObserver<TransferRequest> {
                 .setStatus(status)
                 .build();
         this.responseObserver.onNext(response);
+        /*if (TransferStatus.COMPLETED.equals(status)) {
+            var response = TransferResponse.newBuilder()
+                    .setFromAccount(this.toAccountBalance(transferRequest.getFromAccount()))
+                    .setToAccount(this.toAccountBalance(transferRequest.getToAccount()))
+                    .setStatus(status)
+                    .build();
+            this.responseObserver.onNext(response);
+        }*/
     }
 
     @Override
